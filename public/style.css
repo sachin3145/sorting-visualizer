@@ -1,0 +1,40 @@
+.ArrayBar{
+    background-color: blue;
+    margin: 1px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#root{
+display: inline-block;
+}
+
+#ArrayContainer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    margin: 1vh;
+    padding: 1vh;
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    width: 75vw;
+    height: 70vh;
+    
+    border-radius: 0.5vh;
+    border: solid black;
+}
+
+#NavBar{
+    width: 100%;
+    background-color: blueviolet;
+    background-attachment: fixed;
+}
+#App{
+    width: 100vw;
+    height: 100vh;
+}
