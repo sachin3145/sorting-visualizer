@@ -1,13 +1,15 @@
 import ArrayBar from "./ArrayBar";
+import { useArray } from "./ArrayContext";
 
 function renderBar(x, id) {
   return (<ArrayBar key={id} height={String(x) + "vh"} />);
 }
 
-function ArrayContainer(props) { 
-    return (
+function ArrayContainer() { 
+  const array = useArray();
+  return (
       <div id="ArrayContainer">
-            {props.array.map(renderBar)}
+            {array.map(renderBar)}
       </div>
     );
 }
