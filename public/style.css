@@ -77,7 +77,7 @@
 @media (orientation: portrait) {
 
     body:before {
-        content: "PLEASE TURN YOUR ORIENTATION INTO LANDSCAPE MODE TO CONTINUE";
+        content: "PLEASE TURN YOUR DEVICE ORIENTATION INTO LANDSCAPE MODE TO CONTINUE";
     }
 
     #App {
