@@ -7,3 +7,6 @@ Sorting Visualizer is web applications made to help visualize working of various
 - HTML
 - CSS
 - JavaScript (React)
+
+## Deployment Link
+https://sorting-visualizer-ymme.onrender.com
