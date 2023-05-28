@@ -1,3 +1,5 @@
+import { DELAY } from "./constants";
+
 // bubble sort
 function getBubbleSortAnimations(array) {
   const animations = [];
@@ -5,12 +7,13 @@ function getBubbleSortAnimations(array) {
     for (let j = 0; j < array.length - i - 1; ++j) {
       animations.push({ type: "comp", first: j, second: j + 1 });
       if (array[j] > array[j + 1]) {
-        [array[j], array[j + 1]] = [array[j + 1], array[j]];
         animations.push({ type: "swap", first: j, second: j + 1 });
+        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+        
       }
     }
   }
-  return { animations: animations, resultantArray: array };
+  return { animations: animations, delay:DELAY.BUBBLESORT, name: "Bubble Sort", resultantArray: array };
 }
 
 // selection sort
@@ -28,7 +31,12 @@ function getSelecttionSortAnimations(array) {
     [array[i], array[min]] = [array[min], array[i]];
     animations.push({ type: "swap", first: i, second: min });
   }
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.SELECTIONSORT,
+    name: "Selection Sort",
+    resultantArray: array,
+  };
 }
 
 
@@ -52,7 +60,12 @@ function getInsertionSortAnimations(array) {
     array[j + 1] = key;
     animations.push({ type: "update", index: j + 1, val: array[j + 1] });
   }
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.INSERTIONSORT,
+    name: "Insertion Sort",
+    resultantArray: array,
+  };
 }
 
 // shell sort
@@ -75,7 +88,12 @@ function getShellSortAnimations(array) {
       animations.push({ type: "update", index: j, val: array[j] });
     }
   }
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.SHELLSORT,
+    name: "Shell Sort",
+    resultantArray: array,
+  };
 }
 
 
@@ -84,7 +102,12 @@ function getMergeSortAnimations(array) {
   const animations = [];
   const auxillaryArray = array.slice();
   mergeSortHelper(array, 0, array.length - 1, auxillaryArray, animations);
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.MERGESORT,
+    name: "Merge Sort",
+    resultantArray: array,
+  };
 }
 
 function mergeSortHelper(arr, l, r, aux, animations) {
@@ -135,8 +158,8 @@ function partition(array, animations, low, high) {
     if (array[j] <= pivot) {
       i++;
       [array[i], array[j]] = [array[j], array[i]];
+      animations.push({ type: "swap", first: i, second: j });
     }
-    animations.push({ type: "swap", first: i, second: j });
   }
   [array[i + 1], array[high]] = [array[high], array[i + 1]];
   animations.push({ type: "swap", first: i + 1, second: high });
@@ -154,7 +177,12 @@ function quickSort(array, animations, low, high) {
 function getQuickSortAnimations(array) {
   const animations = [];
   quickSort(array, animations, 0, array.length - 1);
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.QUICKSORT,
+    name: "Quick Sort",
+    resultantArray: array,
+  };
 }
 
 // heap sort
@@ -190,7 +218,12 @@ function getHeapSortAnimations(array) {
     animations.push({ type: "swap", first: i, second: 0});
     heapify(array, animations, i, 0);
   }
-  return { animations: animations, resultantArray: array };
+  return {
+    animations: animations,
+    delay: DELAY.HEAPSORT,
+    name: "Heap Sort",
+    resultantArray: array,
+  };
 }
 
 

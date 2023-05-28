@@ -1,86 +1,86 @@
-
 @media (orientation: landscape) {
     .ArrayBar {
-            margin: 2px;
-        }
-    
-        * {
-            margin: 0;
-            padding: 0;
-            background-color: #222831;
-        }
-    
-        #content {
-            padding-top: 10vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-    
-        #ArrayContainer {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-    
-            margin: 1vh;
-            padding: 1vh;
-            padding-bottom: 0;
-            margin-bottom: 0;
-    
-            width: 75vw;
-            height: 70vh;
-    
-            border-bottom: solid #EEEEEE;
-        }
-    
-        #header {
-            width: 100%;
-            padding-top: 1vh;
-            color: #222831;
-            font-size: xx-large;
-            color: #EEEEEE;
-            display: none;
-            justify-content: space-evenly;
-        }
-    
-        #NavBar {
-            width: 100%;
-            color: red;
-            background-color: #EEEEEE;
-            background-attachment: fixed;
-            display: flex;
-            justify-content: space-evenly;
-        }
-    
-        #App {
-            width: 100vw;
-            height: 100vh;
-        }
-    
-        button {
-            background-color: transparent;
-            background-repeat: no-repeat;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-            outline: none;
-            padding: 2vh;
-            color: #222831;
-            font-size: 3vh;
-        }
-    
-        button:hover {
-            background-color: #00ADB5;
-            color: #EEEEEE;
-        }
+        margin: 2px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        background-color: #222831;
+    }
+
+    #content {
+        padding-top: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    #ArrayContainer {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        margin: 1vh;
+        padding: 1vh;
+        padding-bottom: 0;
+        margin-bottom: 0;
+
+        width: 75vw;
+        height: 70vh;
+
+        border-bottom: solid #EEEEEE;
+    }
+
+    #header {
+        width: 100%;
+        padding-top: 1vh;
+        color: #222831;
+        font-size: xx-large;
+        color: #EEEEEE;
+        display: none;
+        justify-content: space-evenly;
+    }
+
+    #NavBar {
+        width: 100%;
+        color: red;
+        background-color: #EEEEEE;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #App {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    button {
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+        padding: 2vh;
+        color: #222831;
+        font-size: 3vh;
+    }
+
+    button:hover {
+        background-color: #00ADB5;
+        color: #EEEEEE;
+    }
 }
 
-@media (orientation: portrait){
+@media (orientation: portrait) {
 
-    body:before{
+    body:before {
         content: "PLEASE TURN YOUR ORIENTATION INTO LANDSCAPE MODE TO CONTINUE";
     }
-    #App{
+
+    #App {
         display: none;
     }
 }

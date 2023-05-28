@@ -1,65 +1,159 @@
-import { getArray } from "./utility";
-import { useArray, useArrayUpdate } from "./ArrayContext";
-import { getBubbleSortAnimations, getHeapSortAnimations, getInsertionSortAnimations, getMergeSortAnimations, getQuickSortAnimations, getSelecttionSortAnimations, getShellSortAnimations } from "./sortingAlgorithms";
-function genNewArray(f) {
-  f(getArray(Math.floor((0.75 * window.innerWidth) / 4), 20, 65));
-}
-
-function updateArrayValue(array, i, v, f) {
-  // can be used to update single of the state array
-  let myArr = array.slice();
-  myArr[i] = v;
-  f(myArr);
-}
-
-function swapArrayValues(array, i, j, f) {
-  // can be used to swap two values in the state array
-  let myArr = array.slice();
-  [myArr[i], myArr[j]] = [myArr[j], myArr[i]];
-  f(myArr);
-}
-
-// const asyncWait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import {
+  changeColor,
+  swapArrayValues,
+  updateArrayValue,
+  genNewArray,
+} from "./utility";
+import {
+  useArray,
+  useArrayUpdate,
+  useColorArrayUpdate,
+  useColorArray,
+} from "./ArrayContext";
+import {
+  getBubbleSortAnimations,
+  getHeapSortAnimations,
+  getInsertionSortAnimations,
+  getMergeSortAnimations,
+  getQuickSortAnimations,
+  getSelecttionSortAnimations,
+  getShellSortAnimations,
+} from "./sortingAlgorithms";
+import { COLOR, DELAY } from "./constants";
+import { useState } from "react";
 
 function NavBar() {
-
-    const setArray = useArrayUpdate();
-    const array = useArray();
-
-  function animate(animations) {
-    // add required delay
-    for (let i = 0; i < animations.length; ++i){
-      if (animations[i].type === "comp") {
-        // comp code
-      }
-      else if (animations[i].type === "swap") {
-        swapArrayValues(array, animations[i].first, animations[i].second, setArray);
-      }
-      else if (animations[i].type === "update") {
-        updateArrayValue(
-          array,
-          animations[i].index,
-          animations[i].val,
-          setArray
+  const setArray = useArrayUpdate();
+  const array = useArray();
+  const setColorArray = useColorArrayUpdate();
+  const colorArray = useColorArray();
+  const [fast, setSpeed] = useState(true);
+  async function animate(animations, delay) {
+    let myArray = array.slice();
+    let myColorArray = colorArray.slice();
+    for (let i = 0; i < animations.length; ++i) {
+      const animationElement = animations[i];
+      if (animationElement.type === "comp") {
+        await changeColor(
+          myColorArray,
+          animationElement.first,
+          animationElement.second,
+          setColorArray,
+          COLOR.ACTIVE,
+          fast ? DELAY.FAST : DELAY.SLOW
+        );
+      } else if (animationElement.type === "swap") {
+        myArray = await swapArrayValues(
+          myArray,
+          animationElement.first,
+          animationElement.second,
+          setArray,
+          delay
+        );
+      } else if (animationElement.type === "update") {
+        myArray = await updateArrayValue(
+          myArray,
+          animationElement.index,
+          animationElement.val,
+          setArray,
+          delay
         );
       }
     }
+    setColorArray(Array(array.length).fill(COLOR.PASSIVE));
+    document.getElementById("NavBar").style.display = "flex";
+    document.getElementById("header").style.display = "none";
   }
 
+  function callAnimate(f) {
+    const obj = f(array.slice());
+    document.getElementById("header").textContent = obj.name;
+    document.getElementById("NavBar").style.display = "none";
+    document.getElementById("header").style.display = "flex";
+    const delay = obj.delay;
+    const animations = obj.animations;
+    animate(animations, delay);
+  }
 
-
-    return (
+  return (
+    <div>
+      <div id="header"></div>
       <nav id="NavBar">
-        <button id="genNewArray" onClick={() => { genNewArray(setArray); }}>generateNewArray</button>
-        <button id="selectionSort" onClick={() => { animate(getSelecttionSortAnimations(array).animations) }}>selectionSort</button>
-        <button id="bubbleSort" onClick={() => { animate(getBubbleSortAnimations(array).animations) }}>bubbleSort</button>
-        <button id="insertionSort" onClick={() => { animate(getInsertionSortAnimations(array).animations) }}>insertionSort</button>
-        <button id="shellSort" onClick={() => { animate(getShellSortAnimations(array).animations) }}>shellSort</button>
-        <button id="mergeSort" onClick={() => { animate(getMergeSortAnimations(array).animations) }}>mergeSort</button>
-        <button id="quickSort" onClick={() => { animate(getQuickSortAnimations(array).animations) }}>quickSort</button>
-        <button id="heapSort" onClick={() => { animate(getHeapSortAnimations(array).animations) }}>heapSort</button>
+        <button
+          id="genNewArray"
+          onClick={() => {
+            genNewArray(setArray);
+          }}
+        >
+          Generate New Array
+        </button>
+        <button
+          id="selectionSort"
+          onClick={() => {
+            callAnimate(getSelecttionSortAnimations);
+          }}
+        >
+          Selection Sort
+        </button>
+        <button
+          id="bubbleSort"
+          onClick={() => {
+            callAnimate(getBubbleSortAnimations);
+          }}
+        >
+          Bubble Sort
+        </button>
+        <button
+          id="insertionSort"
+          onClick={() => {
+            callAnimate(getInsertionSortAnimations);
+          }}
+        >
+          Insertion Sort
+        </button>
+        <button
+          id="shellSort"
+          onClick={() => {
+            callAnimate(getShellSortAnimations);
+          }}
+        >
+          Shell Sort
+        </button>
+        <button
+          id="mergeSort"
+          onClick={() => {
+            callAnimate(getMergeSortAnimations);
+          }}
+        >
+          Merge Sort
+        </button>
+        <button
+          id="quickSort"
+          onClick={() => {
+            callAnimate(getQuickSortAnimations);
+          }}
+        >
+          Quick Sort
+        </button>
+        <button
+          id="heapSort"
+          onClick={() => {
+            callAnimate(getHeapSortAnimations);
+          }}
+        >
+          Heap Sort
+        </button>
+        <button
+          id="toggleSpeed"
+          onClick={() => {
+            setSpeed(!fast);
+          }}
+        >
+          {fast ? "SLOW DOWN" : "SPEED UP"}
+        </button>
       </nav>
-    );
+    </div>
+  );
 }
 
 export default NavBar;

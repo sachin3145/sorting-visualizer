@@ -1,5 +1,5 @@
 function ArrayBar(props) {
-    const barStyle = {width: "2px", height: props.height, backgroundColor: props.color };
+    const barStyle = {width: "4px", height: props.height, backgroundColor: props.color};
     return (<div className="ArrayBar" style={barStyle}></div>)
 }
 

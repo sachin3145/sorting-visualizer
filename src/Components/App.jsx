@@ -8,7 +8,9 @@ function App() {
     <div id="App">
       <ArrayProvider>
         <NavBar />
-        <ArrayContainer />
+        <div id="content">
+          <ArrayContainer />
+        </div>
       </ArrayProvider>
     </div>
   );
